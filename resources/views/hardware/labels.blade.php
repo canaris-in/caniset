@@ -24,7 +24,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         /* width: {{ $settings->labels_width }}in;
         height: {{ $settings->labels_height }}in; */
         width: 300px;
-        height: 300px;
+        height: 320px;
         margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
 
@@ -164,9 +164,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         <div class="row">
             <div class="col-12">
                 <div class="text">
-            @if (($asset->asset_tag!='1'))
+            @if (($asset->_snipeit_host_name_21!='1'))
                 <div class="pull-left">
-                    Host Name: {{ $asset->asset_tag }}
+                    Host Name: {{ $asset->_snipeit_host_name_21 }}
                 </div>
             @endif
                 </div>
