@@ -10,7 +10,7 @@
 <?php
 $settings->labels_width = $settings->labels_width - $settings->labels_display_sgutter;
 $settings->labels_height = $settings->labels_height - $settings->labels_display_bgutter;
-// Leave space on bottom for 1D barcode if necessary
+
 $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='') ? $settings->labels_height - .3 : $settings->labels_height - 0.1;
 ?>
 
@@ -166,7 +166,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
                 <div class="text">
             @if (($asset->_snipeit_host_name_21!='1'))
                 <div class="pull-left">
-                    Host Name: {{ $asset->_snipeit_host_name_21 }}
+                    {{ $asset->_snipeit_host_name_21 }}
                 </div>
             @endif
                 </div>
