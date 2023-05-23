@@ -168,10 +168,13 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="checkbox">
+                                    @foreach ($customfield as $item)
                                     <label for="labels_display_name">
-                                        {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
-                                        {{ trans('admin/hardware/form.name') }}
+                                        {{ Form::checkbox($item->name, '1', old($item->name,   $item),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
+                                        {{-- {{ trans('admin/hardware/') }} --}}
+                                        {{ $item->name }}
                                     </label>
+                                    @endforeach
                                     <label for="labels_display_serial">
                                         {{ Form::checkbox('labels_display_serial', '1', old('labels_display_serial',   $setting->labels_display_serial),['class' => 'minimal', 'aria-label'=>'labels_display_serial']) }}
                                         {{ trans('admin/hardware/form.serial') }}
@@ -187,7 +190,7 @@
                                     <label for="labels_display_company_name">
                                         {{ Form::checkbox('labels_display_company_name', '1', old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal', 'aria-label'=>'labels_display_company_name']) }}
                                         {{ trans('admin/companies/table.name') }}
-				    </label>
+				                    </label>
 
                                 </div> <!--/.CHECKBOX-->
                             </div> <!--/.col-md-9-->
