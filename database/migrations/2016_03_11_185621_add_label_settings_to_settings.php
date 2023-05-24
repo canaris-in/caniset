@@ -26,6 +26,7 @@ class AddLabelSettingsToSettings extends Migration
             $table->decimal('labels_pagewidth', 7, 5)->default(8.5);
             $table->decimal('labels_pageheight', 7, 5)->default(11);
             $table->tinyInteger('labels_display_name')->default(0);
+            $table->tinyInteger('labels_display_customefield')->default(0);
             $table->tinyInteger('labels_display_serial')->default(1);
             $table->tinyInteger('labels_display_tag')->default(1);
         });
@@ -53,6 +54,7 @@ class AddLabelSettingsToSettings extends Migration
           'labels_pagewidth',
           'labels_pageheight',
           'labels_display_name',
+          'labels_display_customefield',
           'labels_display_serial',
           'labels_display_tag'
         );
