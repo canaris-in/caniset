@@ -8,6 +8,7 @@ use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Setting;
+use App\Models\CustomField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -44,10 +45,17 @@ class BulkAssetsController extends Controller
         if ($request->filled('bulk_actions')) {
             switch ($request->input('bulk_actions')) {
                 case 'labels':
+                    // Get all custom fields from settings table
+                    $arrayValues = DB::Table('settings')->pluck('labels_display_customefield');
+                    
+                    //Custom fields converted into string array to array
+                    $result = json_decode($arrayValues[0]);
+                    $customFields = CustomField::select(['name','db_column'])->whereIn('id', $result)->get();
                     return view('hardware/labels')
                         ->with('assets', Asset::find($asset_ids))
                         ->with('settings', Setting::getSettings())
                         ->with('bulkedit', true)
+                        ->with('customFields', $customFields)
                         ->with('count', 0);
                 case 'delete':
                     $assets = Asset::with('assignedTo', 'location')->find($asset_ids);

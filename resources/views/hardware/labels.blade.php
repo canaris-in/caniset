@@ -24,7 +24,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         /* width: {{ $settings->labels_width }}in;
         height: {{ $settings->labels_height }}in; */
         width: 300px;
-        height: 320px;
+        height: auto;
         margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
 
@@ -169,6 +169,13 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
                     {{ $asset->_snipeit_host_name_21 }}
                 </div>
             @endif
+            <!-- start CF -->
+            @foreach ($customFields as $cf)
+                <div class="pull-left">
+                    {{ object_get($asset, $cf->db_column) }}
+                </div>
+            @endforeach
+            <!-- end CF -->
                 </div>
             </div>
         </div>

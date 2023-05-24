@@ -168,13 +168,20 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="checkbox">
+                                    @php
+                                        $selectedCfs = json_decode($setting->labels_display_customefield);
+                                    @endphp
                                     @foreach ($customfield as $item)
-                                    <label for="labels_display_name">
-                                        {{ Form::checkbox($item->name, '1', old($item->name,   $item),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
-                                        {{-- {{ trans('admin/hardware/') }} --}}
+                                    <label for="labels_display_customefield">
+                                       
+                                        {{ Form::checkbox('labels_custom_field[]', $item->id, old($item->name),['class' => 'minimal', 'aria-label'=>'labels_display_customefield', 'checked' => in_array($item->id, $selectedCfs) ? true : false]) }}
                                         {{ $item->name }}
                                     </label>
                                     @endforeach
+                                    <label for="labels_display_name">
+                                        {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
+                                        {{ trans('admin/hardware/form.serial') }}
+                                    </label>
                                     <label for="labels_display_serial">
                                         {{ Form::checkbox('labels_display_serial', '1', old('labels_display_serial',   $setting->labels_display_serial),['class' => 'minimal', 'aria-label'=>'labels_display_serial']) }}
                                         {{ trans('admin/hardware/form.serial') }}

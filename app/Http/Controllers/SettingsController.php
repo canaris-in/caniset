@@ -830,7 +830,6 @@ class SettingsController extends Controller
         $setting = Setting::getSettings();
         $customfield = CustomField::getCustomeField();
         
-        // var_dump($customfield);die();
         return view('settings.labels', compact('setting','customfield'));
     }
 
@@ -862,8 +861,11 @@ class SettingsController extends Controller
         $setting->labels_pageheight = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
+        $setting->labels_display_customefield = $request->input('labels_custom_field');
 
 
+
+      
 
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
