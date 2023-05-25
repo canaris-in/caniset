@@ -11,6 +11,7 @@ use App\Models\Group;
 use App\Models\Setting;
 use App\Models\Asset;
 use App\Models\User;
+use App\Models\CustomField;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
 use Auth;
@@ -827,8 +828,9 @@ class SettingsController extends Controller
     public function getLabels()
     {
         $setting = Setting::getSettings();
-
-        return view('settings.labels', compact('setting'));
+        $customfield = CustomField::getCustomeField();
+        
+        return view('settings.labels', compact('setting','customfield'));
     }
 
     /**
@@ -859,8 +861,11 @@ class SettingsController extends Controller
         $setting->labels_pageheight = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
+        $setting->labels_display_customefield = $request->input('labels_custom_field');
 
 
+
+      
 
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;

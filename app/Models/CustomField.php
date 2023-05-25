@@ -385,4 +385,8 @@ class CustomField extends Model
 
         return $this->format;
     }
+
+    public static function getCustomeField(){
+        return (new CustomField())->all();
+    }
 }
