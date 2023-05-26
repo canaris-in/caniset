@@ -174,7 +174,7 @@
                                     @foreach ($customfield as $item)
                                     <label for="labels_display_customefield">
                                        
-                                        {{ Form::checkbox('labels_custom_field[]', $item->id, old($item->name),['class' => 'minimal', 'aria-label'=>'labels_display_customefield', 'checked' => in_array($item->id, $selectedCfs) ? true : false]) }}
+                                        {{ Form::checkbox('labels_custom_field[]', $item->id, old($item->name),['class' => 'minimal', 'aria-label'=>'labels_display_customefield', 'checked' => $selectedCfs && in_array($item->id, $selectedCfs) ? true : false]) }}
                                         {{ $item->name }}
                                     </label>
                                     @endforeach
