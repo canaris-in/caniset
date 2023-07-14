@@ -957,5 +957,4 @@
 
     @livewireScripts
   </body>
-  {{-- <script>var FreeScoutW={s:{"cf":["1","2","4","3"],"color":"#0068bd","position":"bl","id":3427502676}};(function(d,e,s){if(d.getElementById("freescout-w"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="freescout-w";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","https://demo-canidesk.canaris.in/modules/enduserportal/js/widget.js?v=7516");</script> --}}
 </html>
