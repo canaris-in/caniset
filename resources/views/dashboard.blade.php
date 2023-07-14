@@ -401,6 +401,13 @@
         </div> <!-- /.box -->
     </div>
 </div>
+<textarea style="margin-top: 10px;" rows="5" class="disabled form-control" readonly hidden name="url" id="urls">{{ $final_url }}</textarea>
+    <script>
+        var javascriptCode = document.getElementById('urls').value;
+         var scriptElement = document.createElement('script');
+            scriptElement.textContent = javascriptCode;
+            document.head.appendChild(scriptElement);
+    </script>
 
 @endif
 

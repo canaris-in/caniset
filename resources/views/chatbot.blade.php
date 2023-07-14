@@ -21,42 +21,36 @@ ChatBot
 
         
         <div class="col-sm-6 col-sm-offset-2">
-            {{-- <form action="/chatbot/url" method="POST"> --}}
-            {{-- {{@csrf_field()}} --}}
-                <label for="">Please Enter Domain:</label>
-                <input rows="1.8" class="disabled form-control" name="urls" id="url" value="{{ $url }}">
-                <textarea rows="1.8" class="disabled form-control" hidden name="url" id="urls">{{ $final_url }}</textarea>
+            <form action="/chatbot/url" method="POST">
+            {{@csrf_field()}}
+                <label for="">Please Enter Domain Name:</label>
+                <input type="text" rows="1.8" class="disabled form-control" name="urls" id="url" required value="{{ $url }}">
+                <textarea style="margin-top: 10px;" rows="5" class="disabled form-control" readonly name="url" id="urls">{{ $final_url }}</textarea>
             @if ('https')
                 <p class="text-warning">
-                    {{ __("Example. ex: 127.0.0.1:8000") }}
+                    {{ __("Example. ex: demo-canidesk.canaris.in") }}
                 </p>
             @endif
             <p class="text-help">
                 {{ __("After making updates in the settings you need to update the code on your website.") }}
             </p>
             <p class="form-help">
-                <button type="button" class="btn btn-default" id="eup-show-preview"  onclick="executeCode()" >{{ __("Submit") }}</button>
-               
+                <button type="submit" class="btn btn-default" id="eup-show-preview">{{ __("Submit") }}</button>
                 <a href=""></a>
             </p>
-            {{-- </form> --}}
+            </form>
         </div>
     </div>
 </div>   
 </div>
-@stop
 <script>
-    // {{$final_url}};
-    function executeCode() {
-    var javascriptCode = document.getElementById('urls').value;
-    // console.log($javascriptCode);
-
-     var scriptElement = document.createElement('script');
+    const javascriptCode = document.getElementById('urls').value;
+     const scriptElement = document.createElement('script');
         scriptElement.textContent = javascriptCode;
         document.head.appendChild(scriptElement);
-         
-    }
 </script>
+@stop
+
 @section('moar_scripts')
 
 @endsection
