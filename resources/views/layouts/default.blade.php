@@ -585,6 +585,13 @@
                     </a>
                 </li>
             @endcan
+            <li>
+                <a href="/chatbot/url">
+                    <i class="far fa-comments" aria-hidden="true"></i>
+                    <span>ChatBot SettingUrls</span>
+                </a>
+            </li>
+     
 
             @can('backend.interact')
                 <li class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">

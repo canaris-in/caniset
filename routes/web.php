@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
@@ -503,3 +504,6 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
+
+Route::get('/chatbot/url',[ChatbotController::class,'index']);
+Route::post('/chatbot/url',[ChatbotController::class,'addUrl']);
