@@ -280,7 +280,6 @@ class AcceptanceController extends Controller
             ];
 
             $acceptance->decline($sig_filename);
-            return $acceptance;
             // $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
             event(new CheckoutDeclined($acceptance));
             $return_msg = trans('admin/users/message.declined');
