@@ -238,7 +238,7 @@ class AcceptanceController extends Controller
             }
 
             $acceptance->accept($sig_filename, $item->getEula(), $pdf_filename);
-            $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
+            // $acceptance->notify(new AcceptanceAssetAcceptedNotification($data));
             event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
@@ -280,7 +280,7 @@ class AcceptanceController extends Controller
             ];
 
             $acceptance->decline($sig_filename);
-            $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
+            // $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
             event(new CheckoutDeclined($acceptance));
             $return_msg = trans('admin/users/message.declined');
         }
