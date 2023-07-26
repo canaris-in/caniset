@@ -170,6 +170,11 @@ class Accessory extends SnipeModel
         return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
+    public static function assetcount()
+    {
+        $totalQty = Accessory::sum('qty');
+        return $totalQty;
+   }
     /**
      * Establishes the accessory -> category relationship
      *

@@ -209,6 +209,11 @@ class Component extends SnipeModel
         return $this->qty - $this->numCheckedOut();
     }
 
+    public static function assetcount()
+    {
+        $totalQty = Component::sum('qty');
+        return $totalQty;
+   }
     /**
      * Query builder scope to order on company
      *
