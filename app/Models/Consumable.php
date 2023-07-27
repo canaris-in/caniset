@@ -308,6 +308,11 @@ class Consumable extends SnipeModel
         return $checkedout;
     }
 
+    public static function assetcount()
+    {
+        $totalQty =self::sum('qty');
+        return $totalQty;
+   }
     /**
      * Checks the number of available consumables
      *

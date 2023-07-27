@@ -36,10 +36,10 @@ class DashboardController extends Controller
             $asset_stats = null;
 
             $counts['asset'] = \App\Models\Asset::count();
-            $counts['accessory'] = \App\Models\Accessory::count();
+            $counts['accessory'] = \App\Models\Accessory::assetcount();
             $counts['license'] = \App\Models\License::assetcount();
-            $counts['consumable'] = \App\Models\Consumable::count();
-            $counts['component'] = \App\Models\Component::count();
+            $counts['consumable'] = \App\Models\Consumable::assetcount();
+            $counts['component'] = \App\Models\Component::assetcount();
             $counts['user'] = \App\Models\Company::scopeCompanyables(Auth::user())->count();
             $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
 
