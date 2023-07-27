@@ -172,7 +172,7 @@ class Accessory extends SnipeModel
 
     public static function assetcount()
     {
-        $totalQty = Accessory::sum('qty');
+        $totalQty =self::sum('qty');
         return $totalQty;
    }
     /**

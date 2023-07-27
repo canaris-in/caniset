@@ -211,7 +211,7 @@ class Component extends SnipeModel
 
     public static function assetcount()
     {
-        $totalQty = Component::sum('qty');
+        $totalQty =self::sum('qty');
         return $totalQty;
    }
     /**

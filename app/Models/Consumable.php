@@ -310,7 +310,7 @@ class Consumable extends SnipeModel
 
     public static function assetcount()
     {
-        $totalQty = Consumable::sum('qty');
+        $totalQty =self::sum('qty');
         return $totalQty;
    }
     /**
