@@ -500,26 +500,26 @@
                     @endcan
 
                     @can('create', \App\Models\Asset::class)
-                      <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}>
+                      <li{!! request()->has('status') && request()->get('status') === 'Deleted' ? ' class="active"' : '' !!}>
                           <a href="{{ url('hardware?status=Deleted') }}">
                               {{ trans('general.deleted') }}
                           </a>
                       </li>
-                      <li>
+                      <li{!! (Request::is('hardware/maintenances') ? ' class="active"' : '') !!}>
                           <a href="{{ route('maintenances.index') }}">
                             {{ trans('general.asset_maintenances') }}
                           </a>
                       </li>
                     @endcan
                     @can('admin')
-                      <li>
+                      <li{!! (Request::is('hardware/history') ? ' class="active"' : '') !!}>
                           <a href="{{ url('hardware/history') }}">
                             {{ trans('general.import-history') }}
                           </a>
                       </li>
                     @endcan
                     @can('audit', \App\Models\Asset::class)
-                        <li>
+                        <li{!! (Request::is('hardware/bulkaudit') ? ' class="active"' : '') !!}>
                             <a href="{{ route('assets.bulkaudit') }}">
                                 {{ trans('general.bulkaudit') }}
                             </a>
