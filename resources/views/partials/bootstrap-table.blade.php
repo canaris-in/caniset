@@ -564,11 +564,13 @@
     }
 
     function trueFalseFormatter(value) {
-        if ((value) && ((value == 'true') || (value == '1'))) {
-            return '<i class="fas fa-check text-success"></i>';
-        } else {
-            return '<i class="fas fa-times text-danger"></i>';
-        }
+        // if ((value) && ((value == 'true') || (value == '1'))) {
+        //     return '<i class="fas fa-check text-success"></i>';
+        // } else {
+        //     return '<i class="fas fa-times text-danger"></i>';
+        // }
+        return (value && (value == 'true' || value == '1')) ? '✓' : '✖';
+
     }
 
     function dateDisplayFormatter(value) {
