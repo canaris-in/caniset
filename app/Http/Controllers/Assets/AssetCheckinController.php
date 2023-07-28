@@ -134,7 +134,7 @@ class AssetCheckinController extends Controller
                 return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
 
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkin.success'));
+            return redirect()->route('assets.requested')->with('success', trans('admin/hardware/message.checkin.success'));
         }
         // Redirect to the asset management page with error
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.error').$asset->getErrors());
