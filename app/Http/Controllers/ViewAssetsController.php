@@ -181,7 +181,7 @@ class ViewAssetsController extends Controller
             $asset->decrement('requests_counter', 1);
 
             $logaction->logaction('request canceled');
-            $settings->notify(new RequestAssetCancelation($data));
+            // $settings->notify(new RequestAssetCancelation($data));
 
             return redirect()->route('requestable-assets')
                 ->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
@@ -190,7 +190,7 @@ class ViewAssetsController extends Controller
         $logaction->logaction('requested');
         $asset->request();
         $asset->increment('requests_counter', 1);
-        $settings->notify(new RequestAssetNotification($data));
+        // $settings->notify(new RequestAssetNotification($data));
 
         return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
     }
