@@ -578,14 +578,14 @@
             </li>
             @endcan
             @can('import')
-                <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
+                <li{!! (Request::is('import*') ? ' class="active"' : '') !!}>
                     <a href="{{ route('imports.index') }}">
                         <i class="fas fa-cloud-download-alt fa-fw" aria-hidden="true"></i>
                         <span>{{ trans('general.import') }}</span>
                     </a>
                 </li>
             @endcan
-            <li>
+            <li{!! (Request::is('chatbot/url') ? ' class="active"' : '') !!}>
                 <a href="/chatbot/url">
                     <i class="far fa-comments" aria-hidden="true"></i>
                     <span>ChatBot SettingUrls</span>
