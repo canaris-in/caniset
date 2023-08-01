@@ -50,7 +50,11 @@ class BulkAssetsController extends Controller
                     
                     //Custom fields converted into string array to array
                     $result = json_decode($arrayValues[0]);
-                    $customFields = CustomField::select(['name','db_column'])->whereIn('id', $result)->get();
+                    if($result==null){
+                        $customFields = CustomField::select(['name','db_column'])->get();
+                    }else{
+                        $customFields = CustomField::select(['name','db_column'])->whereIn('id', $result)->get();
+                    }
                     return view('hardware/labels')
                         ->with('assets', Asset::find($asset_ids))
                         ->with('settings', Setting::getSettings())
