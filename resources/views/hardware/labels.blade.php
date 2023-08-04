@@ -180,16 +180,38 @@
             <div class="row">
                 <div class="col-12">
                     <div class="text">
+                        @if ($settings->qr_text != '')
+                            <div class="pull-left">
+                                <strong>{{ $settings->qr_text }}</strong>
+                                <br>
+                            </div>
+                        @endif
+                        @if ($settings->labels_display_company_name == '1' && $asset->company)
+                            <div class="pull-left">
+                             {{ $asset->company->name }}
+                            </div>
+                        @endif
                         @if ($settings->labels_display_name == '1' && $asset->name != '')
                             <div class="pull-left">
                              {{ $asset->name }}
                             </div>
                         @endif
-                        @if ($asset->_snipeit_host_name_21 != '1')
+                        @if ($settings->labels_display_tag == '1' && $asset->asset_tag != '')
                             <div class="pull-left">
-                                {{ $asset->_snipeit_host_name_21 }}
+                             {{ $asset->asset_tag }}
                             </div>
                         @endif
+                        @if ($settings->labels_display_serial == '1' && $asset->serial != '')
+                            <div class="pull-left">
+                             {{ $asset->serial }}
+                            </div>
+                        @endif
+                        @if ($settings->labels_display_model == '1' && $asset->model->name != '')
+                            <div class="pull-left">
+                             {{ $asset->model->name }} {{ $asset->model->model_number }}
+                            </div>
+                        @endif
+                        @if ($settings->labels_custom_field == '1')
                         <!-- start CF -->
                         @foreach ($customFields as $cf)
                             <div class="pull-left">
@@ -197,6 +219,7 @@
                             </div>
                         @endforeach
                         <!-- end CF -->
+                        @endif
                     </div>
                 </div>
             </div>

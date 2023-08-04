@@ -171,13 +171,7 @@
                                     @php
                                         $selectedCfs = json_decode($setting->labels_display_customefield);
                                     @endphp
-                                    @foreach ($customfield as $item)
-                                    <label for="labels_display_customefield">
-                                       
-                                        {{ Form::checkbox('labels_custom_field[]', $item->id, old($item->name),['class' => 'minimal', 'aria-label'=>'labels_display_customefield', 'checked' => $selectedCfs && in_array($item->id, $selectedCfs) ? true : false]) }}
-                                        {{ $item->name }}
-                                    </label>
-                                    @endforeach
+                                    
                                     <label for="labels_display_name">
                                         {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
                                         {{ trans('admin/hardware/form.serial') }}
@@ -199,6 +193,13 @@
                                         {{ trans('admin/companies/table.name') }}
 				                    </label>
 
+                                    @foreach ($customfield as $item)
+                                    <label for="labels_display_customefield">
+                                       
+                                        {{ Form::checkbox('labels_custom_field[]', $item->id, old($item->name),['class' => 'minimal', 'aria-label'=>'labels_display_customefield', 'checked' => $selectedCfs && in_array($item->id, $selectedCfs) ? true : false]) }}
+                                        {{ $item->name }}
+                                    </label>
+                                    @endforeach
                                 </div> <!--/.CHECKBOX-->
                             </div> <!--/.col-md-9-->
                         </div> <!--/.form-group-->
