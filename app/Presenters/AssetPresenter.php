@@ -39,14 +39,16 @@ class AssetPresenter extends Presenter
             //     'title' => trans('general.company'),
             //     'visible' => false,
             //     'formatter' => 'assetCompanyObjFilterFormatter',
-            // ], [
-            //     'field' => 'name',
-            //     'searchable' => true,
-            //     'sortable' => true,
-            //     'title' => trans('admin/hardware/form.name'),
-            //     'visible' => true,
-            //     'formatter' => 'hardwareLinkFormatter',
-            // ], [
+            // ],
+             [
+                'field' => 'name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('admin/hardware/form.name'),
+                'visible' => true,
+                'formatter' => 'hardwareLinkFormatter',
+            ],
+            //  [
             //     'field' => 'image',
             //     'searchable' => false,
             //     'sortable' => true,
