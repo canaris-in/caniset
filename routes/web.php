@@ -23,6 +23,7 @@ use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\AutoDiscoveryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -507,3 +508,5 @@ Route::middleware(['auth'])->get(
 
 Route::get('/chatbot/url',[ChatbotController::class,'index']);
 Route::post('/chatbot/url',[ChatbotController::class,'addUrl']);
+
+Route::get('/feature/autodiscovery',[AutoDiscoveryController::class,'index']);
