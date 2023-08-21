@@ -509,4 +509,14 @@ Route::middleware(['auth'])->get(
 Route::get('/chatbot/url',[ChatbotController::class,'index']);
 Route::post('/chatbot/url',[ChatbotController::class,'addUrl']);
 
-Route::get('/feature/autodiscovery',[AutoDiscoveryController::class,'index']);
+
+Route::get('/mapping',[AutoDiscoveryController::class,'mapping']);
+
+Route::get('/autodiscovery',[AutoDiscoveryController::class,'index']);
+
+Route::get('/fetch-file/{filename}',[AutoDiscoveryController::class,'fileName']);
+
+Route::post('/mapping',[AutoDiscoveryController::class,'mapping']);
+
+Route::post('/mapping/import',[AutoDiscoveryController::class,'storeData']);
+

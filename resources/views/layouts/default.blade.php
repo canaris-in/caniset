@@ -593,7 +593,7 @@
             </li>
 
             <li{!! (Request::is('feature/autodiscovery') ? ' class="active"' : '') !!}>
-                <a href="/feature/autodiscovery">
+                <a href="/autodiscovery">
                     <i class="fa fa-spinner" aria-hidden="true"></i>
                     <span>Auto Discovery</span>
                 </a>
