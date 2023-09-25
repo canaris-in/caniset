@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use App\Models\Chatbot;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 /**
  * This controller handles all actions related to the Admin Dashboard
@@ -26,7 +28,52 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // Show the page
+
+
+        $assets=Asset::all();
+        // return $assets;
+        $assets = Asset::select('assets.*', 'categories.name as category_name')
+        ->join('models', 'assets.model_id', '=', 'models.id')
+        ->join('categories', 'models.category_id', '=', 'categories.id')
+        ->get()
+        ->map(function ($asset) {
+            $warrantyEndDate = Carbon::parse($asset->purchase_date)
+                ->addMonths($asset->warranty_months);
+            
+            $oneMonthBeforeExpiry = Carbon::now()->addMonths(1);
+    
+            if ($warrantyEndDate > Carbon::now() && $warrantyEndDate <= $oneMonthBeforeExpiry) {
+                $asset->warranty_status = 'Due for Renewal';
+            } elseif ($warrantyEndDate >= Carbon::now()) {
+                $asset->warranty_status = 'Within Warranty';
+            } else {
+                $asset->warranty_status = 'Warranty Expired';
+            }
+    
+            return $asset;
+        });
+
+        $data = json_decode($assets);
+        $uniqueCategoryNames = [];
+        $categoryCounts = [];
+        foreach ($data as $item) {
+             $categoryName = $item->category_name;
+        if (!in_array($categoryName, $uniqueCategoryNames)) {
+        $uniqueCategoryNames[] = $categoryName;
+        }
+
+        if (isset($categoryCounts[$categoryName])) {
+            $categoryCounts[$categoryName]++;
+        } else {
+            $categoryCounts[$categoryName] = 1;
+        }
+        }
+        
+        // return $categoryCounts;
+
+        $expiredWarrantyCount = $assets->where('warranty_status', 'Warranty Expired')->count();
+        $withinWarrantyCount = $assets->where('warranty_status', 'Within Warranty')->count();
+        $dueforrenewal=$assets->where('warranty_status', 'Due for Renewal')->count();
         $chatbot =Chatbot::all();
         $urls = $chatbot->pluck('url');
         $url = $urls->first();
@@ -48,7 +95,10 @@ class DashboardController extends Controller
                 \Artisan::call('passport:install');
             }
 
-            return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts)->with('final_url', $final_url);
+            $assetcount = $assets->count();
+            return view('dashboard')->with(compact('asset_stats', 'assetcount', 'counts', 'final_url', 'expiredWarrantyCount', 'withinWarrantyCount', 'dueforrenewal','uniqueCategoryNames','categoryCounts'));
+
+            // return view('dashboard')->with('asset_stats', $asset_stats)->with('assetcount', $assets->count())->with('counts', $counts)->with('final_url', $final_url)->with('expiredWarrantyCount', $expiredWarrantyCount)->with('withinWarrantyCount', $withinWarrantyCount)->with('dueforrenewal', $dueforrenewal);
         } else {
             // Redirect to the profile page
             return redirect()->intended('account/view-assets');

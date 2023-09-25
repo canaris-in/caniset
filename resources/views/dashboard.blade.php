@@ -193,6 +193,119 @@
 
 @else
 
+{{-- pie chart of warrenty and insurence --}}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h2 class="box-title">
+                    {{ 'Warrenty' }}
+                </h2>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
+                        <i class="fas fa-minus" aria-hidden="true"></i>
+                        <span class="sr-only">{{ trans('general.collapse') }}</span>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="chart-responsive">
+                            <canvas id="warrentyPieChart"></canvas>
+                        </div> <!-- ./chart-responsive -->
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+            </div><!-- /.box-body -->
+        </div> <!-- /.box -->
+  </div>
+  <div class="col-md-6">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h2 class="box-title">
+                {{ 'Insurance' }}
+            </h2>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
+                    <i class="fas fa-minus" aria-hidden="true"></i>
+                    <span class="sr-only">{{ trans('general.collapse') }}</span>
+                </button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="chart-responsive">
+                        <canvas id="insurancePieChart"></canvas>
+                    </div> <!-- ./chart-responsive -->
+                </div> <!-- /.col -->
+            </div> <!-- /.row -->
+        </div><!-- /.box-body -->
+    </div> <!-- /.box -->
+  </div>
+</div>
+
+
+{{-- pie chart of asset and asset --}}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h2 class="box-title">
+                    {{ 'Asset Category' }}
+                </h2>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
+                        <i class="fas fa-minus" aria-hidden="true"></i>
+                        <span class="sr-only">{{ trans('general.collapse') }}</span>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="chart-responsive">
+                            <canvas id="assetcategoryPieChart"></canvas>
+                        </div> <!-- ./chart-responsive -->
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+            </div><!-- /.box-body -->
+        </div> <!-- /.box -->
+  </div>
+    <div class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h2 class="box-title">
+                    {{ 'Asset Type' }}
+                </h2>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool right-button" data-widget="collapse" aria-hidden="true">
+                        <i class="fas fa-minus" aria-hidden="true"></i>
+                        <span class="sr-only">{{ trans('general.collapse') }}</span>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="chart-responsive">
+                            <canvas id="assettypePieChart"></canvas>
+                        </div> <!-- ./chart-responsive -->
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+            </div><!-- /.box-body -->
+        </div> <!-- /.box -->
+      </div>
+</div>
+
+
 <!-- recent activity -->
 <div class="row">
   <div class="col-md-8">
@@ -419,6 +532,137 @@
 @stop
 
 @push('js')
+{{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+{{-- pie chart of warrentyPieChart --}}
+<script>
+    var ctx = document.getElementById('warrentyPieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Out of Warrenty','Under Warranty','Warranty Due for Renewal'],
+            datasets: [{
+                data: [{{  $expiredWarrantyCount }}, {{ $withinWarrantyCount }},{{ $dueforrenewal }}],
+                // data: ['200','500','300'],
+                backgroundColor: ['red', 'blue','green'],
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'right',
+                },
+                datalabels: {
+                    color: 'white',
+                    formatter: (value, ctx) => {
+                        return value + ' %'; 
+                    },
+                    align: 'start',
+                }
+            }
+        }
+    });
+</script>
+
+{{-- pie chart of insurancePieChart --}}
+<script>
+    var ctx = document.getElementById('insurancePieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Out of Insurance','Under Insurance','Insurance Due for Renewal'],
+            datasets: [{
+                // data: [{{  $expiredWarrantyCount }}, {{ $withinWarrantyCount }},'300'],
+                data: ['70','500','100'],
+                backgroundColor: ['red', 'yellow','pink'],
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'right', 
+                },
+                datalabels: {
+                    color: 'white',
+                    formatter: (value, ctx) => {
+                        return value + ' %'; 
+                    },
+                    align: 'start',
+                }
+            }
+        }
+    });
+</script>
+{{-- pie chart of Asset Category --}}
+<script>
+    var uniqueCategoryNames = @json($uniqueCategoryNames);
+    var categoryCounts = @json($categoryCounts);
+</script>
+<script>
+    var ctx = document.getElementById('assetcategoryPieChart').getContext('2d');
+    function generateRandomColors(count) {
+        var colors = [];
+        for (var i = 0; i < count; i++) {
+            var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            colors.push(randomColor);
+        }
+        return colors;
+    }
+
+    var randomColors = generateRandomColors(uniqueCategoryNames.length);
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: uniqueCategoryNames,
+            datasets: [{
+                data: Object.values(categoryCounts),
+                backgroundColor: randomColors,
+            }]
+        },
+        options: {
+            // plugins: {
+            //     legend: {
+            //         position: 'right',
+            //     },
+            //     datalabels: {
+            //         color: 'white',
+            //         formatter: (value, ctx) => {
+            //             return value + ' %'; 
+            //         },
+            //         align: 'start', 
+            //     }
+            // }
+        }
+    });
+</script>
+
+{{-- pie chart of Asset Type --}}
+<script>
+    var ctx = document.getElementById('assettypePieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Asset','Licenes','Accessories','Consumables','Components'],
+            datasets: [{
+                data: [{{ $assetcount }},{{ number_format($counts['license']) }},{{ number_format($counts['accessory']) }},{{ number_format($counts['consumable']) }},{{ number_format($counts['component']) }}],
+                backgroundColor: ['lightblue', '#E40078','orange','Indigo','orange'],
+            }]
+        },
+        options: {
+            // plugins: {
+            //     legend: {
+            //         position: 'right', 
+            //     },
+            //     datalabels: {
+            //         color: 'white',
+            //         formatter: (value, ctx) => {
+            //             return value + ' %'; 
+            //         },
+            //         align: 'start',
+            //     }
+            // }
+        }
+    });
+</script>
 
 
 
@@ -429,7 +673,7 @@
       var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
       var pieChart = new Chart(pieChartCanvas);
       var ctx = document.getElementById("statusPieChart");
-      var pieOptions = {
+      var pieOptions = { 
               legend: {
                   position: 'top',
                   responsive: true,
