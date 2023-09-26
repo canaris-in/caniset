@@ -28,10 +28,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
-
-        $assets=Asset::all();
-        // return $assets;
         $assets = Asset::select('assets.*', 'categories.name as category_name')
         ->join('models', 'assets.model_id', '=', 'models.id')
         ->join('categories', 'models.category_id', '=', 'categories.id')
@@ -68,8 +64,6 @@ class DashboardController extends Controller
             $categoryCounts[$categoryName] = 1;
         }
         }
-        
-        // return $categoryCounts;
 
         $expiredWarrantyCount = $assets->where('warranty_status', 'Warranty Expired')->count();
         $withinWarrantyCount = $assets->where('warranty_status', 'Within Warranty')->count();
