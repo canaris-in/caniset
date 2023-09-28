@@ -5,7 +5,7 @@
     {{ trans('admin/hardware/general.view') }} {{ $asset->asset_tag }}
     @parent
 @stop
-
+{{-- test --}}
 {{-- Right header --}}
 @section('header_right')
 
