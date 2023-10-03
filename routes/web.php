@@ -23,6 +23,7 @@ use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\AutoDiscoveryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -507,3 +508,15 @@ Route::middleware(['auth'])->get(
 
 Route::get('/chatbot/url',[ChatbotController::class,'index']);
 Route::post('/chatbot/url',[ChatbotController::class,'addUrl']);
+
+
+Route::get('/mapping',[AutoDiscoveryController::class,'mapping']);
+
+Route::get('/autodiscovery',[AutoDiscoveryController::class,'index']);
+
+Route::get('/fetch-file/{filename}',[AutoDiscoveryController::class,'fileName']);
+
+Route::post('/mapping',[AutoDiscoveryController::class,'mapping']);
+
+Route::post('/mapping/import',[AutoDiscoveryController::class,'storeData']);
+

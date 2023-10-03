@@ -12,6 +12,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class DepartmentsController extends Controller
 {
@@ -78,6 +79,13 @@ class DepartmentsController extends Controller
             default:
                 $departments->orderBy($sort, $order);
                 break;
+        }
+
+        //location or branch wise data
+        $user = Auth::user();
+        if($user != Gate::allows('admin')){
+            $userLocationId = $user->location_id;
+            $departments->where('departments.location_id', '=', $userLocationId);
         }
 
         $total = $departments->count();
