@@ -591,6 +591,13 @@
                     <span>ChatBot SettingUrls</span>
                 </a>
             </li>
+
+            <li{!! (Request::is('feature/autodiscovery') ? ' class="active"' : '') !!}>
+                <a href="/autodiscovery">
+                    <i class="fa fa-spinner" aria-hidden="true"></i>
+                    <span>Auto Discovery</span>
+                </a>
+            </li>
      
 
             @can('backend.interact')

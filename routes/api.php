@@ -1194,5 +1194,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ], 404);
         }); // end fallback routes
 
+        // Route::get('/fetch-file',[AutoDiscoveryController::class,'fileName']);
 
 }); // end API routes

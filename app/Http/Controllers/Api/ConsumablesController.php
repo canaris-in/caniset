@@ -11,6 +11,8 @@ use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ConsumablesController extends Controller
 {
@@ -114,6 +116,13 @@ class ConsumablesController extends Controller
             default:
                 $consumables = $consumables->orderBy($column_sort, $order);
                 break;
+        }
+
+        //location or branch wise data
+        $user = Auth::user();
+        if($user != Gate::allows('admin')){
+            $userLocationId = $user->location_id;
+            $consumables->where('consumables.location_id', '=', $userLocationId);
         }
 
         $total = $consumables->count();

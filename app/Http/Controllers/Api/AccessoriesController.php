@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Gate;
 
 class AccessoriesController extends Controller
 {
@@ -106,6 +107,13 @@ class AccessoriesController extends Controller
                 break;
         }
  
+        //location or branch wise data
+        $user = Auth::user();
+        if($user != Gate::allows('admin')){
+            $userLocationId = $user->location_id;
+            $accessories->where('accessories.location_id', '=', $userLocationId);
+        }
+
         $total = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
 

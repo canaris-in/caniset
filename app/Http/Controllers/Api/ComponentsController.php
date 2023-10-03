@@ -12,6 +12,8 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ComponentsController extends Controller
 {
@@ -97,6 +99,13 @@ class ComponentsController extends Controller
                 $components = $components->orderBy($column_sort, $order);
                 break;
         }
+
+         //location or branch wise data
+         $user = Auth::user();
+         if($user != Gate::allows('admin')){
+             $userLocationId = $user->location_id;
+             $components->where('components.location_id', '=', $userLocationId);
+         }
 
         $total = $components->count();
         $components = $components->skip($offset)->take($limit)->get();
