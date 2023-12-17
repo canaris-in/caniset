@@ -19,6 +19,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\autoDiscovery\AutoDiscoveryController;
 use App\Http\Controllers\ViewAssetsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -507,3 +508,152 @@ Route::middleware(['auth'])->get(
 
 Route::get('/chatbot/url',[ChatbotController::class,'index']);
 Route::post('/chatbot/url',[ChatbotController::class,'addUrl']);
+
+
+
+// urls for atutodiscoverys 
+
+//urls for ip scan
+Route::get(
+    'AutoDiscovery/ipScan', 
+    [AutoDiscoveryController::class, 'ipScan']
+)->name('AutoDiscovery.ipScan');
+
+Route::get(
+    'AutoDiscovery/viewipScan', 
+    [AutoDiscoveryController::class, 'viewIpScan']
+)->name('AutoDiscovery.viewipScan');
+
+Route::post(
+    'AutoDiscovery/addipscan', 
+    [AutoDiscoveryController::class, 'addipscan']
+)->name('AutoDiscovery.addipscan');
+Route::delete('AutoDiscovery/deleteIPScan/{id}', [AutoDiscoveryController::class, 'deleteIPScan'])->name('AutoDiscovery.deleteIPScan');
+
+
+
+
+
+
+//urls for subnet scan
+Route::get(
+    'AutoDiscovery/subnetScan', 
+    [AutoDiscoveryController::class, 'subnetScan']
+)->name('AutoDiscovery.subnetScan');
+
+Route::get(
+    'AutoDiscovery/viewsubnetScan', 
+    [AutoDiscoveryController::class, 'viewsubnetScan']
+)->name('AutoDiscovery.viewsubnetscan');
+
+Route::post(
+    'AutoDiscovery/addsubnetScan', 
+    [AutoDiscoveryController::class, 'addsubnetScan']
+)->name('AutoDiscovery.addsubnetScan');
+
+Route::delete('AutoDiscovery/deleteSubnetScan/{id}', [AutoDiscoveryController::class, 'deleteSubnetScan'])->name('AutoDiscovery.deleteSubnetScan');
+
+
+
+
+
+
+//urls for network discovery
+Route::get(
+    'AutoDiscovery/viewNetworkDiscovery', 
+    [AutoDiscoveryController::class, 'viewNetworkDiscovery']
+)->name('AutoDiscovery.viewNetworkDiscovery');
+
+
+//urls for schedule scan
+Route::get(
+    'AutoDiscovery/schedueleScan', 
+    [AutoDiscoveryController::class, 'schedueleScan']
+)->name('AutoDiscovery.schedueleScan');
+
+Route::get(
+    'AutoDiscovery/viewschedueleScan', 
+    [AutoDiscoveryController::class, 'viewschedueleScan']
+)->name('AutoDiscovery.viewschedueleScan');
+
+Route::post(
+    'AutoDiscovery/addschedueleScan', 
+    [AutoDiscoveryController::class, 'addschedueleScan']
+)->name('AutoDiscovery.addschedueleScan');
+Route::delete('AutoDiscovery/deleteScheduleScan/{id}', [AutoDiscoveryController::class, 'deleteScheduleScan'])->name('AutoDiscovery.deleteScheduleScan');
+
+//import function for the data filling into the asset table
+
+Route::post('AutoDiscovery/import', [AutoDiscoveryController::class, 'import'])->name('AutoDiscovery.import');
+
+
+
+//view  route for SW inventory
+Route::get(
+    'AutoDiscovery/viewSWInventory', 
+    [AutoDiscoveryController::class, 'viewSWInventory']
+)->name('AutoDiscovery.viewSWInventory');
+
+//view route for SWL inventory
+Route::get(
+    'AutoDiscovery/viewSWLInventory', 
+    [AutoDiscoveryController::class, 'viewSWLInventory']
+)->name('AutoDiscovery.viewSWLInventory');
+
+
+//view route for HW inventory
+Route::get(
+    'AutoDiscovery/viewHWInventory', 
+    [AutoDiscoveryController::class, 'viewHWInventory']
+)->name('AutoDiscovery.viewHWInventory');
+
+
+
+// view route for Processor Configuration
+
+Route::get(
+    'AutoDiscovery/viewProcessorConfiguration', 
+    [AutoDiscoveryController::class, 'viewProcessorConfiguration']
+)->name('AutoDiscovery.viewProcessorConfiguration');
+
+// view route for Install memeory Configuration
+
+Route::get(
+    'AutoDiscovery/viewMemoryConfiguration', 
+    [AutoDiscoveryController::class, 'viewMemoryConfiguration']
+)->name('AutoDiscovery.viewMemoryConfiguration');
+
+
+// view route for Hard Disk Configuration
+
+Route::get(
+    'AutoDiscovery/viewDiskConfiguration', 
+    [AutoDiscoveryController::class, 'viewDiskConfiguration']
+)->name('AutoDiscovery.viewDiskConfiguration');
+
+
+// view route for Logical Drive Configuration
+
+Route::get(
+    'AutoDiscovery/viewDriveConfiguration', 
+    [AutoDiscoveryController::class, 'viewDriveConfiguration']
+)->name('AutoDiscovery.viewDriveConfiguration');
+
+
+
+// device wise and device wise get data
+Route::get(
+    'AutoDiscovery/viewDeviceWise', 
+    [AutoDiscoveryController::class, 'viewDeviceWise']
+)->name('AutoDiscovery.viewDeviceWise');
+
+Route::get('/getDataDeviceWise/{deviceIp}', [AutoDiscoveryController::class, 'getDataDeviceWise']);
+
+
+// Software wise and software wise get data
+Route::get(
+    'AutoDiscovery/viewSoftwareWise', 
+    [AutoDiscoveryController::class, 'viewSoftwareWise']
+)->name('AutoDiscovery.viewSoftwareWise');
+
+Route::get('/getDataSoftwareWise/{appname}', [AutoDiscoveryController::class, 'getDataSoftwareWise']);
