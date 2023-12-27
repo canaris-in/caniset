@@ -10,10 +10,14 @@
         :: {{ $snipeSettings->site_name }}
     </title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=device-width, initial-scale=1" name="viewport">    
 
     <meta name="apple-mobile-web-app-capable" content="yes">
-
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"> --}}
+    <link rel="stylesheet"  href="{{ asset('css/jquery/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery/buttons.dataTables.min.css') }}">
+    
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css"> --}}
 
 
     <link rel="apple-touch-icon"
@@ -704,6 +708,12 @@
                                                     {{ trans('View Software Wise') }}
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.viewSoftwareMgt') }}"
+                                                    {{ Request::is('AutoDiscovery/viewSoftwareMgt') ? ' class="active"' : '' }}>
+                                                    {{ trans('Software License Management') }}
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endcan
@@ -742,6 +752,76 @@
                                                 <a href="{{ route('AutoDiscovery.viewDriveConfiguration') }}"
                                                     {{ Request::is('AutoDiscovery/viewDriveConfiguration') ? ' class="active"' : '' }}>
                                                     {{ trans('Logical Drive Configuration') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endcan
+                                {{-- @can('QRCode.view')
+                                    <li class="treeview{{ Request::is('QRCode*') ? ' active' : '' }}">
+                                        <a href="#" class="dropdown-toggle">
+                                            <i style='font-size:18px' class='fas'>&#xf029;</i>
+                                            <span>{{ trans('QR Code Generator') }}</span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.ipBased') }}"
+                                                    {{ Request::is('AutoDiscovery/ipBased') ? ' class="active"' : '' }}>
+                                                    {{ trans('IP Based') }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.nonIPBased') }}"
+                                                    {{ Request::is('AutoDiscovery/nonIPBased') ? ' class="active"' : '' }}>
+                                                    {{ trans('NonIP Based') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endcan --}}
+                                @can('assetReconciliation .view')
+                                    <li class="treeview{{ Request::is('assetReconciliation*') ? ' active' : '' }}">
+                                        <a href="#" class="dropdown-toggle">
+                                            <i style='font-size:18px' class='fa fa-tasks'></i>
+                                            <span>{{ trans('Asset Reconciliation') }}</span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.assetReconciliation') }}"
+                                                    {{ Request::is('AutoDiscovery/assetReconciliation') ? ' class="active"' : '' }}>
+                                                    {{ trans('Asset Audit and Reconciliation') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endcan
+                                @can('rfid .view')
+                                    <li class="treeview{{ Request::is('rfid*') ? ' active' : '' }}">
+                                        <a href="#" class="dropdown-toggle">
+                                            <i style='font-size:18px' class='fa fa-id-card'></i>
+                                            <span>{{ trans('RFID') }}</span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.assetRFID') }}"
+                                                    {{ Request::is('AutoDiscovery/assetRFID') ? ' class="active"' : '' }}>
+                                                    {{ trans('Asset Movement Details') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endcan
+                                @can('AssetAgent .view')
+                                    <li class="treeview{{ Request::is('AssetAgent*') ? ' active' : '' }}">
+                                        <a href="#" class="dropdown-toggle">
+                                            <i style='font-size:18px' class='fa fa-user-secret'></i>
+                                            <span>{{ trans('Asset Agent') }}</span>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.assetAgent') }}"
+                                                    {{ Request::is('AutoDiscovery/assetAgent') ? ' class="active"' : '' }}>
+                                                    {{ trans('Agent Installed device') }}
                                                 </a>
                                             </li>
                                         </ul>

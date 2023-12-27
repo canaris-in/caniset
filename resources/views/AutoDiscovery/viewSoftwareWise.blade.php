@@ -19,6 +19,15 @@
             /* Adjust the height as needed */
             overflow-y: auto;
         }
+
+        *,
+        *:after,
+        *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+        }
     </style>
 
     <div id="app">
@@ -38,7 +47,7 @@
                                         {{-- <div class="row">
                                         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
                                             <div class="fixed-table-container"> --}}
-                                        <table id="exampleTable" class="table table-bordered">
+                                        <table id="exampleTable" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Application Name</th>
@@ -62,9 +71,9 @@
                                         </table>
                                     </div>
                                     <!-- Add pagination links -->
-                                    <div class="d-flex justify-content-center">
+                                    {{-- <div class="d-flex justify-content-center">
                                         {{ $data->links() }}
-                                    </div>
+                                    </div> --}}
                                     {{-- </div>
                                         </div>
                                     </div> --}}
@@ -83,18 +92,13 @@
         <div class="modal-dialog" role="document">
             <section class="content" id="main">
                 <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs hidden-print">
-                        <!-- Tab headers -->
-                        <!-- ... -->
+                    <ul class="nav nav-tabs hidden-print"  style="background-color: black; color: white; padding-left:10px;">
+                        <h3 class="pull-left pagetitle" >Scanned Softwares</h3>
                     </ul>
                     <div class="tab-content">
                         <!-- Tab panes -->
                         <div class="tab-pane active" id="checkedout">
-                            <div class="table-responsive">
-                                {{-- <div class="row">
-                                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
-                                    <div class="fixed-table-container"> --}}
-                                <table id="exampleTableGetData" class="table table-bordered">
+                                <table id="exampleTableGetData" class="display nowrap" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Device Name</th>
@@ -106,14 +110,6 @@
                                         
                                     </tbody>
                                 </table>
-                            </div>
-                            <!-- Add pagination links -->
-                            <div class="d-flex justify-content-center">
-                                {{ $data->links() }}
-                            </div>
-                            {{-- </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -122,8 +118,6 @@
     </div>
 @endsection
 @section('moar_scripts')
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Event listener for the cell click
@@ -151,6 +145,36 @@
                                 .catch(error => console.error('Error fetching additional data:', error));
 
                 });
+            });
+        });
+    </script>
+   <script src="/js/jquery/jquery.min.js"></script>
+   <script src="/js/jquery/select2.min.js"></script>
+   <script src="/js/jquery/jquery.dataTables.min.js"></script>
+   <script src="/js/jquery/dataTables.buttons.min.js"></script>
+   <script src="/js/jquery/jszip.min.js"></script>
+   <script src="/js/jquery/pdfmake.min.js"></script>
+   <script src="/js/jquery/vfs_fonts.js"></script>
+   <script src="/js/jquery/buttons.html5.min.js"></script>
+   <script src="/js/jquery/buttons.print.min.js"></script>
+   <script src="/js/jquery/sweetalert2@11.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#exampleTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+     <script>
+        $(document).ready(function() {
+            $('#exampleTableGetData').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
     </script>

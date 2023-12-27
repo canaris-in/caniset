@@ -10,12 +10,12 @@ class LogicaldriveConfiguration extends Model
     protected $table = 'logicaldrive_configuration';
     protected $fillable = [
         'id',
-        'asset_id', 'capacity', 'drive', 'drive_type', 'drive_usage', 'file_type', 'free_space', 'serial_number'
+        'asset_id','device_name','ip_address', 'capacity', 'drive', 'drive_type', 'drive_usage', 'file_type', 'free_space', 'serial_number'
     ];
 
-    public function asset()
-    {
-        return $this->belongsTo(ProcessorConfiguration::class, 'asset_id', 'asset_id');
-    }
+    // public function asset()
+    // {
+    //     return $this->belongsTo(ProcessorConfiguration::class, 'asset_id', 'asset_id');
+    // }
     use HasFactory;
 }

@@ -17,6 +17,8 @@ class CreateLogicaldriveConfigurationTable extends Migration
             $table->id('id');
             $table->unsignedBigInteger('asset_id');
             $table->string('capacity')->nullable();
+            $table->string('device_name')->nullable();
+            $table->string('ip_address')->nullable();
             $table->string('drive')->nullable();
             $table->string('drive_type')->nullable();
             $table->string('drive_usage')->nullable();

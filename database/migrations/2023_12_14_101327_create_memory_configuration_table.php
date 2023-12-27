@@ -16,6 +16,8 @@ class CreateMemoryConfigurationTable extends Migration
         Schema::create('memory_configuration', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('asset_id');
+            $table->string('device_name')->nullable();
+            $table->string('ip_address')->nullable();
             $table->string('bank_label')->nullable();
             $table->string('capacity')->nullable();
             $table->string('frequency')->nullable();

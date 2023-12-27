@@ -17,6 +17,8 @@ class CreateDiskConfigurationTable extends Migration
             $table->id('id');
             $table->unsignedBigInteger('asset_id');
             $table->string('capacity')->nullable();
+            $table->string('device_name')->nullable();
+            $table->string('ip_address')->nullable();
             $table->string('interface_type')->nullable();
             $table->string('manufacturer')->nullable();
             $table->string('media_type')->nullable();

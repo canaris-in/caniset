@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    View Logical Drive Configuration
+    Agent Installed Device
     @parent
 @stop
 
@@ -50,31 +50,39 @@
                                         <table id="exampleTable" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                <tr>
                                                     <th>ID</th>
-                                                    <th>Asset ID</th>
-                                                    <th>Capacity</th>
-                                                    <th>Drive</th>
-                                                    <th>Drive Type</th>
-                                                    <th>Drive Usage</th>
-                                                    <th>File Type</th>
-                                                    <th>Free Space</th>
+                                                    <th>IP Address</th>
+                                                    <th>Host Name</th>
+                                                    <th>Branch Name</th>
+                                                    <th>Agent Start Time</th>
+                                                    <th>Device Status</th>
+                                                    <th>Version</th>
+                                                    <th>MAC Address</th>
+                                                    <th>Device IP</th>
+                                                    <th>Device MAC List</th>
+                                                    <th>SW Last Discover</th>
                                                     <th>Serial Number</th>
-                                                </tr>
+                                                    <th>SW Count</th>
+                                                    <th>SW Scan Type</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($data as $item)
+                                                @foreach ($data as $device)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
-                                                        <td>{{ $item->asset_id }}</td>
-                                                        <td>{{ $item->capacity }}</td>
-                                                        <td>{{ $item->drive }}</td>
-                                                        <td>{{ $item->drive_type }}</td>
-                                                        <td>{{ $item->drive_usage }}</td>
-                                                        <td>{{ $item->file_type }}</td>
-                                                        <td>{{ $item->free_space }}</td>
-                                                        <td>{{ $item->serial_number }}</td>
+                                                        <td>{{ $device->id }}</td>
+                                                        <td >{{ $device->IP_ADDRESS }}</td>
+                                                        <td>{{ $device->HOST_NAME }}</td>
+                                                        <td>{{ $device->BRANCH_NAME }}</td>
+                                                        <td>{{ $device->AGENT_START_TIME }}</td>
+                                                        <td>{{ $device->DEVICE_STATUS }}</td>
+                                                        <td>{{ $device->VERSION }}</td>
+                                                        <td>{{ $device->MAC_ADDRESS }}</td>
+                                                        <td>{{ $device->DEVICE_IP }}</td>
+                                                        <td>{{ $device->DEVICE_MAC_LIST }}</td>
+                                                        <td>{{ $device->SW_LAST_DISCOVER }}</td>
+                                                        <td>{{ $device->SERIALNUMBER }}</td>
+                                                        <td>{{ $device->SW_COUNT }}</td>
+                                                        <td>{{ $device->SW_SCAN_TYPE }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -97,16 +105,16 @@
     </div>
 @endsection
 @section('moar_scripts')
-<script src="/js/jquery/jquery.min.js"></script>
-<script src="/js/jquery/select2.min.js"></script>
-<script src="/js/jquery/jquery.dataTables.min.js"></script>
-<script src="/js/jquery/dataTables.buttons.min.js"></script>
-<script src="/js/jquery/jszip.min.js"></script>
-<script src="/js/jquery/pdfmake.min.js"></script>
-<script src="/js/jquery/vfs_fonts.js"></script>
-<script src="/js/jquery/buttons.html5.min.js"></script>
-<script src="/js/jquery/buttons.print.min.js"></script>
-<script src="/js/jquery/sweetalert2@11.js"></script>
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="/js/jquery/select2.min.js"></script>
+    <script src="/js/jquery/jquery.dataTables.min.js"></script>
+    <script src="/js/jquery/dataTables.buttons.min.js"></script>
+    <script src="/js/jquery/jszip.min.js"></script>
+    <script src="/js/jquery/pdfmake.min.js"></script>
+    <script src="/js/jquery/vfs_fonts.js"></script>
+    <script src="/js/jquery/buttons.html5.min.js"></script>
+    <script src="/js/jquery/buttons.print.min.js"></script>
+    <script src="/js/jquery/sweetalert2@11.js"></script>
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({

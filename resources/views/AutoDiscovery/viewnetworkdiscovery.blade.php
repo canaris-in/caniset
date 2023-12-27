@@ -13,6 +13,20 @@
         [v-cloak] {
             display: none;
         }
+        .table-container {
+            max-height: 500px;
+            /* Adjust the height as needed */
+            overflow-y: auto;
+        }
+
+        *,
+        *:after,
+        *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+        }
     </style>
 
     <div id="app">
@@ -32,7 +46,7 @@
                                         <div
                                             class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
                                             <div class="fixed-table-container"> --}}
-                                    <table id="exampleTable" class="table table-bordered">
+                                    <table id="exampleTable"  class="display nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th> <input type="checkbox" name="selectedItems[]" value=""></th>
@@ -146,6 +160,23 @@
                     // Handle error
                     console.error(error);
                 }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#exampleTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
     </script>

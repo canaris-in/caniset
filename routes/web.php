@@ -600,6 +600,12 @@ Route::get(
     [AutoDiscoveryController::class, 'viewSWLInventory']
 )->name('AutoDiscovery.viewSWLInventory');
 
+// view route for software license management
+Route::get(
+    'AutoDiscovery/viewSoftwareMgt', 
+    [AutoDiscoveryController::class, 'viewSoftwareMgt']
+)->name('AutoDiscovery.viewSoftwareMgt');
+
 
 //view route for HW inventory
 Route::get(
@@ -657,3 +663,37 @@ Route::get(
 )->name('AutoDiscovery.viewSoftwareWise');
 
 Route::get('/getDataSoftwareWise/{appname}', [AutoDiscoveryController::class, 'getDataSoftwareWise']);
+
+
+//this route for the QR code generator for ipbased
+
+Route::get('AutoDiscovery/ipBased', [AutoDiscoveryController::class, 'ipBased'])->name('AutoDiscovery.ipBased');
+
+Route::get('AutoDiscovery/ipBasedData', [AutoDiscoveryController::class, 'ipBasedData'])->name('AutoDiscovery.ipBasedData');
+
+Route::get('AutoDiscovery/addipbased', [AutoDiscoveryController::class, 'addipbased'])->name('AutoDiscovery.addipbased');
+
+//this route for the QR code generator for nonipbased
+
+Route::get('AutoDiscovery/nonIPBased', [AutoDiscoveryController::class, 'nonIPBased'])->name('AutoDiscovery.nonIPBased');
+
+Route::get('AutoDiscovery/nonIPBasedData', [AutoDiscoveryController::class, 'nonIPBasedData'])->name('AutoDiscovery.nonIPBasedData');
+
+Route::get('AutoDiscovery/addnonIPbased', [AutoDiscoveryController::class, 'addnonIPbased'])->name('AutoDiscovery.addnonIPbased');
+
+
+
+
+// this route for the Asset Reconcilation
+
+Route::get('AutoDiscovery/assetReconciliation', [AutoDiscoveryController::class, 'assetReconciliation'])->name('AutoDiscovery.assetReconciliation');
+
+// this route for the RFID
+
+Route::get('AutoDiscovery/assetRFID', [AutoDiscoveryController::class, 'assetRFID'])->name('AutoDiscovery.assetRFID');
+
+// this route for the Asset Agent
+
+Route::get('AutoDiscovery/assetAgent', [AutoDiscoveryController::class, 'assetAgent'])->name('AutoDiscovery.assetAgent');
+
+Route::get('/agentInstallDevice/{ipAddress}', [AutoDiscoveryController::class, 'agentInstallDevice'])->name('AutoDiscovery.agentInstallDevice');
