@@ -25,6 +25,9 @@ class CreateAgentInstalledDeviceTable extends Migration
             $table->string('DEVICE_IP', 50)->nullable();
             $table->text('DEVICE_MAC_LIST')->nullable();
             $table->text('SW_LAST_DISCOVER')->nullable();
+            $table->text('HW_LAST_DISCOVER')->nullable();
+            $table->text('HW_DISCOVER_STATUS')->nullable();
+            $table->text('HW_SCAN_TYPE')->nullable();
             $table->string('SERIALNUMBER', 50)->nullable();
             $table->string('SW_COUNT', 50)->nullable();
             $table->string('SW_SCAN_TYPE', 50)->nullable();

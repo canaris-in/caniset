@@ -195,7 +195,7 @@
 
 {{-- pie chart of warrenty and insurence --}}
 
-<div class="row">
+<div class="row" style="display:none;">
     <div class="col-md-6">
         <div class="box box-default">
             <div class="box-header with-border">
@@ -252,7 +252,7 @@
 {{-- pie chart of asset and asset --}}
 
 
-<div class="row">
+<div class="row" style="display:none;">
     <div class="col-md-6">
         <div class="box box-default">
             <div class="box-header with-border">

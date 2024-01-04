@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHwAssetsTable extends Migration
+class CreateHwAssetTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateHwAssetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hw_assets', function (Blueprint $table) {
+        Schema::create('hw_asset', function (Blueprint $table) {
             $table->id('asset_id');
             $table->datetime('acquisition_date')->nullable();
             $table->string('additional_status')->nullable();

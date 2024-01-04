@@ -15,10 +15,13 @@ class CreateSwLicenseInventoryTable extends Migration
     {
         Schema::create('sw_license_inventory', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('asset_id'); 
+            $table->unsignedBigInteger('asset_id')->nullable(); 
             $table->string('device_name')->nullable();
             $table->string('device_ip')->nullable();
             $table->string('mac_id')->nullable();
+            $table->string('host_name')->nullable();
+            $table->string('LAN_IP')->nullable();
+            $table->string('branch_name')->nullable();
             $table->string('data_type')->nullable();
             $table->string('product_name')->nullable();
             $table->string('product_type')->nullable();
@@ -27,7 +30,7 @@ class CreateSwLicenseInventoryTable extends Migration
     
     
             // Adding foreign key constraint for asset_id
-            $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
+            // $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
     
         });
     }

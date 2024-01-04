@@ -714,6 +714,24 @@
                                                     {{ trans('Software License Management') }}
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.swInstallUninstallLog') }}"
+                                                    {{ Request::is('AutoDiscovery/swInstallUninstallLog') ? ' class="active"' : '' }}>
+                                                    {{ trans('Software Install And UnInstall Log') }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.addAssetManagement') }}"
+                                                    {{ Request::is('AutoDiscovery/addAssetManagement') ? ' class="active"' : '' }}>
+                                                    {{ trans('Add Assset Management') }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('AutoDiscovery.viewAssetMgt') }}"
+                                                    {{ Request::is('AutoDiscovery/viewAssetMgt') ? ' class="active"' : '' }}>
+                                                    {{ trans('View Assset Management') }}
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endcan
@@ -730,12 +748,12 @@
                                                     {{ trans('View Hardware Inventory') }}
                                                 </a>
                                             </li>
-                                            <li>
+                                            {{-- <li>
                                                 <a href="{{ route('AutoDiscovery.viewProcessorConfiguration') }}"
                                                     {{ Request::is('AutoDiscovery/viewProcessorConfiguration') ? ' class="active"' : '' }}>
                                                     {{ trans('Processor Configuration') }}
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                             <li>
                                                 <a href="{{ route('AutoDiscovery.viewMemoryConfiguration') }}"
                                                     {{ Request::is('AutoDiscovery/viewMemoryConfiguration') ? ' class="active"' : '' }}>

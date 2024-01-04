@@ -30,9 +30,9 @@
         }
     </style>
 
-    <div id="app">
+    {{-- <div id="app">
         <div class="form-group" id="eup-widget-code-wrapper">
-            <div class="col-sm-12 col-sm-offset-0">
+            <div class="col-sm-12 col-sm-offset-0"> --}}
                 <div id="webui">
                     <section class="content" id="main">
                         <div class="nav-tabs-custom">
@@ -82,9 +82,9 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 
 
 
@@ -125,7 +125,7 @@
             modalCells.forEach(function (cell) {
                 cell.addEventListener('click', function () {
                     var appname = this.getAttribute('data-device-name');
-    
+                    $('#exampleTableGetData').DataTable().destroy();
                     fetch('/getDataSoftwareWise/' + appname)
                                 .then(response => response.json())
                                 .then(additionalData => {
@@ -141,6 +141,15 @@
                                             '</tr>';
                                         tableBody.innerHTML += row;
                                     });
+
+                                    $('#exampleTableGetData').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'csv', 'excel', 'pdf', 'print'
+                            ],
+                            lengthMenu: [10, 25, 50, 100, 500, 1000, 2000],
+                            pageLength: 10
+                        });
                                 })
                                 .catch(error => console.error('Error fetching additional data:', error));
 
@@ -161,21 +170,25 @@
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
     </script>
-     <script>
+     {{-- <script>
         $(document).ready(function() {
             $('#exampleTableGetData').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
-    </script>
+    </script> --}}
 @endsection

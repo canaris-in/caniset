@@ -29,9 +29,9 @@
         }
     </style>
 
-    <div id="app">
+    {{-- <div id="app">
         <div class="form-group" id="eup-widget-code-wrapper">
-            <div class="col-sm-12 col-sm-offset-0">
+            <div class="col-sm-12 col-sm-offset-0"> --}}
                 <div id="webui">
                     <section class="content" id="main">
                         <div class="nav-tabs-custom">
@@ -42,6 +42,7 @@
                             <div class="tab-content">
                                 <!-- Tab panes -->
                                 <div class="tab-pane active" id="checkedout">
+                                    <div class="table-responsive">
                                     {{-- <div class="row">
                                         <div
                                             class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
@@ -60,14 +61,17 @@
                                                 <!-- Add more headers as needed -->
                                             </tr>
                                         </thead>
+                                        @php
+$counter = 1;
+@endphp
                                         <tbody>
                                             @foreach ($data as $item)
                                                 <tr>
                                                     <td>
                                                         <input type="checkbox" name="selectedItems[]"
-                                                            value="{{ $item->id }}">
+                                                            value="{{ $counter }}">
                                                     </td>
-                                                    <td>{{ $item->id }}</td>
+                                                    <td>{{ $counter++ }}</td>
                                                     <td>{{ $item->node_ip }}</td>
                                                     <td>{{ $item->location }}</td>
                                                     <td>{{ $item->mac_ip }}</td>
@@ -81,14 +85,15 @@
                                     {{-- </div>
                                         </div>
                                     </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @section('moar_scripts')
@@ -173,10 +178,12 @@
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
     </script>

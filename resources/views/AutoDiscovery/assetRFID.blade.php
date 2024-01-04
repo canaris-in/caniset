@@ -74,9 +74,9 @@
         }
     </style>
 
-    <div id="app">
+    {{-- <div id="app">
         <div class="form-group" id="eup-widget-code-wrapper">
-            <div class="col-sm-12 col-sm-offset-0">
+            <div class="col-sm-12 col-sm-offset-0"> --}}
                 <div id="webui">
                     <!-- First Section with a different background color -->
                     <section class="content1">
@@ -324,9 +324,9 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -575,6 +575,7 @@
             var tableBody = document.querySelector('#exampleTableGetData tbody');
             var headersElement = document.querySelector('h3.pull-left.pagetitle');
             headersElement.innerHTML = '';
+            $('#exampleTableGetData').DataTable().destroy();
             var headerElement = document.createElement('h3');
             headerElement.classList.add('pagetitle');
             tableBody.innerHTML = '';
@@ -617,6 +618,14 @@
                         '</tr>';
                     tableBody.innerHTML += row;
                 });
+                $('#exampleTableGetData').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'csv', 'excel', 'pdf', 'print'
+                            ],
+                            lengthMenu: [10, 25, 50, 100, 500, 1000, 2000],
+                            pageLength: 10
+                        });
             } else {
                 console.error("Invalid typeName:", typeName);
             }
@@ -628,23 +637,27 @@
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
-                ]
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
     </script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#exampleTableGetData').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
-                ]
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
-    </script>
+    </script> --}}
 
  
 @endsection

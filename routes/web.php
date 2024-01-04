@@ -696,4 +696,25 @@ Route::get('AutoDiscovery/assetRFID', [AutoDiscoveryController::class, 'assetRFI
 
 Route::get('AutoDiscovery/assetAgent', [AutoDiscoveryController::class, 'assetAgent'])->name('AutoDiscovery.assetAgent');
 
-Route::get('/agentInstallDevice/{ipAddress}', [AutoDiscoveryController::class, 'agentInstallDevice'])->name('AutoDiscovery.agentInstallDevice');
+Route::get('/agentInstallDevice', [AutoDiscoveryController::class, 'agentInstallDevice'])->name('AutoDiscovery.agentInstallDevice');
+Route::get('/getHWInventory/{ip_address}', [AutoDiscoveryController::class, 'getHWInventory'])->name('AutoDiscovery.getHWInventory');
+
+//route for softwre install and uninstalled log
+
+Route::get('AutoDiscovery/swInstallUninstallLog', [AutoDiscoveryController::class, 'swInstallUninstallLog'])->name('AutoDiscovery.swInstallUninstallLog');
+
+
+//software asset managment
+
+Route::get('AutoDiscovery/addAssetManagement', [AutoDiscoveryController::class, 'addAssetManagement'])->name('AutoDiscovery.addAssetManagement');
+
+Route::get('AutoDiscovery/getManufactureSoftware', [AutoDiscoveryController::class, 'getManufactureSoftware'])->name('AutoDiscovery.getManufactureSoftware');
+
+
+
+Route::post('AutoDiscovery/submitAssetManagement', [AutoDiscoveryController::class, 'submitAssetManagement'])->name('AutoDiscovery.submitAssetManagement');
+
+
+//view for asset management
+Route::get('AutoDiscovery/viewAssetMgt', [AutoDiscoveryController::class, 'viewAssetMgt'])->name('AutoDiscovery.viewAssetMgt');
+

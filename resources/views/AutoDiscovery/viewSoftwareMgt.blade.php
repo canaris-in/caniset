@@ -30,9 +30,9 @@
         }
     </style>
 
-    <div id="app">
+    {{-- <div id="app">
         <div class="form-group" id="eup-widget-code-wrapper">
-            <div class="col-sm-12 col-sm-offset-0">
+            <div class="col-sm-12 col-sm-offset-0"> --}}
                 <div id="webui">
                     <section class="content" id="main">
                         <div class="nav-tabs-custom">
@@ -126,9 +126,9 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -143,7 +143,9 @@
                             <div class="table-responsive">
                                 <table id="exampleTableGetData" class="display nowrap" style="width:100%">
                                     <thead>
-
+                                       <tr>
+                                        <th></th>
+                                       </tr>
                                     </thead>
                                     <tbody>
 
@@ -165,7 +167,7 @@
             modalCells.forEach(function(cell) {
                 cell.addEventListener('click', function() {
                     // var deviceIp = this.getAttribute('data-device-ip');
-
+                    $('#exampleTableGetData').DataTable().destroy();
                     var modal_name = this.getAttribute('data-name');
                     var modal_no = parseInt(this.getAttribute('data-no'), 10);
 
@@ -173,8 +175,9 @@
                     headersElement.innerHTML = '';
                     var headerElement = document.createElement('h3');
                     headerElement.classList.add('pagetitle');
-                    var tableBody = document.querySelector('#exampleTableGetData tbody');
                     var tablehead = document.querySelector('#exampleTableGetData thead');
+                    var tableBody = document.querySelector('#exampleTableGetData tbody');
+                   
                     tableBody.innerHTML = '';
                     tablehead.innerHTML = '';
 
@@ -292,6 +295,14 @@
                     }
                     headerElement.textContent = headerText;
                     headersElement.appendChild(headerElement);
+                    $('#exampleTableGetData').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'csv', 'excel', 'pdf', 'print'
+                            ],
+                            lengthMenu: [10, 25, 50, 100, 500, 1000, 2000],
+                            pageLength: 10
+                        });
                 });
             });
         });
@@ -309,24 +320,25 @@
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],
-                lengthMenu: [
-                    [10, 20, 30]
-                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
     </script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#exampleTableGetData').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                   'csv', 'excel', 'pdf', 'print'
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
-    </script>
+    </script> --}}
 @endsection

@@ -30,9 +30,9 @@
         }
     </style>
 
-    <div id="app">
+    {{-- <div id="app">
         <div class="form-group" id="eup-widget-code-wrapper">
-            <div class="col-sm-12 col-sm-offset-0">
+            <div class="col-sm-12 col-sm-offset-0"> --}}
                 <div id="webui">
                     <section class="content" id="main">
                         <div class="nav-tabs-custom">
@@ -47,6 +47,9 @@
                                         {{-- <div class="row">
                                         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
                                             <div class="fixed-table-container"> --}}
+                                                @php
+$counter = 1;
+@endphp
                                         <table id="exampleTable" class="display nowrap" style="width:100%">
                                             <thead>
                                                 <tr>
@@ -64,7 +67,7 @@
                                             <tbody>
                                                 @foreach ($data as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $counter++ }}</td>
                                                         <td>{{ $item->asset_id }}</td>
                                                         <td>{{ $item->capacity }}</td>
                                                         <td>{{ $item->interface_type }}</td>
@@ -90,9 +93,9 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('moar_scripts')
 <script src="/js/jquery/jquery.min.js"></script>
@@ -108,10 +111,12 @@
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                     'csv', 'excel', 'pdf', 'print'
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
     </script>

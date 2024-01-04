@@ -30,9 +30,9 @@
         }
     </style>
 
-    <div id="app">
+    {{-- <div id="app">
         <div class="form-group" id="eup-widget-code-wrapper">
-            <div class="col-sm-12 col-sm-offset-0">
+            <div class="col-sm-12 col-sm-offset-0"> --}}
                 <div id="webui">
                     <section class="content" id="main">
                         <div class="nav-tabs-custom">
@@ -44,13 +44,13 @@
                                 <!-- Tab panes -->
                                 <div class="tab-pane active" id="checkedout">
                                     <div class="table-responsive">
-                                        {{-- <div class="row">
-                                        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
-                                            <div class="fixed-table-container"> --}}
                                         <table id="exampleTable" class="display nowrap" style="width:100%">
+                                            @php
+$counter = 1;
+@endphp
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <td>{{ $counter++ }}</td>
                                                     <th>IP Address</th>
                                                     <th>Host Name</th>
                                                     <th>Branch Name</th>
@@ -77,7 +77,7 @@
                                                         <td>{{ $device->DEVICE_STATUS }}</td>
                                                         <td>{{ $device->VERSION }}</td>
                                                         <td>{{ $device->MAC_ADDRESS }}</td>
-                                                        <td>{{ $device->DEVICE_IP }}</td>
+                                                        <td style="color: red" class="ip-address">{{ $device->DEVICE_IP }}</td>
                                                         <td>{{ $device->DEVICE_MAC_LIST }}</td>
                                                         <td>{{ $device->SW_LAST_DISCOVER }}</td>
                                                         <td>{{ $device->SERIALNUMBER }}</td>
@@ -88,23 +88,44 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!-- Add pagination links -->
-                                    {{-- <div class="d-flex justify-content-center">
-                                        {{ $data->links() }}
-                                    </div> --}}
-                                    {{-- </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('moar_scripts')
+    <script>
+        $(document).ready(function() {
+            // Iterate through each table row
+            $('.ip-address').click(function() {
+                // Extract IP address from the row
+                var ipAddress = $(this).text();
+
+                // Make an Ajax request to fetch additional data
+                $.ajax({
+                    url: '/agentInstallDevice', // Replace with your actual endpoint
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        ip_address: ipAddress
+                    },
+                    success: function(response) {
+                        
+                        // console.log(response.ip_address);
+                        var redirectUrl = '/getHWInventory/' + response.ip_address;
+                        window.location.href = redirectUrl;                       
+                    }.bind(this), // bind(this) is used to maintain the context of the current <td>
+                    error: function(xhr, status, error) {
+                        console.error('Ajax request failed:', error);
+                    }
+                });
+            });
+        });
+    </script>
     <script src="/js/jquery/jquery.min.js"></script>
     <script src="/js/jquery/select2.min.js"></script>
     <script src="/js/jquery/jquery.dataTables.min.js"></script>
@@ -118,10 +139,12 @@
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
     </script>

@@ -29,9 +29,9 @@
         }
     </style>
 
-    <div id="app">
+    {{-- <div id="app">
         <div class="form-group" id="eup-widget-code-wrapper">
-            <div class="col-sm-12 col-sm-offset-0">
+            <div class="col-sm-12 col-sm-offset-0"> --}}
                 <div id="webui">
                     <section class="content" id="main">
                         <div class="nav-tabs-custom">
@@ -62,10 +62,13 @@
                                                     <th>Value</th>
                                                 </tr>
                                             </thead>
+                                            @php
+$counter = 1;
+@endphp
                                             <tbody>
                                                 @foreach ($data as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $counter++ }}</td>
                                                         <td>{{ $item->asset_id }}</td>
                                                         <td>{{ $item->device_name }}</td>
                                                         <td>{{ $item->device_ip }}</td>
@@ -91,9 +94,9 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('moar_scripts')
 <script src="/js/jquery/jquery.min.js"></script>
@@ -109,10 +112,12 @@
     <script>
         $(document).ready(function() {
             $('#exampleTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                lengthMenu: [10, 25, 50, 100, 500, 1000, 2000], 
+                pageLength: 10
             });
         });
     </script>

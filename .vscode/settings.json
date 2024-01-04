@@ -1,0 +1,4 @@
+{
+    "multiDiffEditor.experimental.enabled": true,
+    "editor.occurrencesHighlight": "multiFile"
+}
